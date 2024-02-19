@@ -2,8 +2,9 @@ import numpy as np
 import pandas as pd
 from scipy import stats as st
 
+
 def characterictics(data):
-    mean, std, var, median, mi, ma, mode, kw1, kw3 = ([] for a in range(9))
+    mean, std, var, median, mi, ma, mode, kw1, kw3 = ([] for _ in range(9))
     for name in data:
         series1 = pd.read_csv(name, header=0, delimiter="\t")
         series1.columns = ["values", "index"]
@@ -20,9 +21,10 @@ def characterictics(data):
     return (np.mean(mean), np.mean(std), np.mean(var), np.mean(mi), np.mean(kw1), np.mean(median), np.mean(kw3),
             np.mean(ma), np.mean(mode))
 
+
 def podpunktB(F, M):
     df = pd.DataFrame(data={'Charakterystyki': ["Średnia:", "Odchylenie st.:", "Wariancja:", "Minimum:", "Kwartyl 1:",
-                                             "Mediana:", "Kwartyl 3:", "Maksimum:", "Moda:"]})
+                            "Mediana:", "Kwartyl 3:", "Maksimum:", "Moda:"]})
     df.insert(1, 'Kobiety', characterictics(F), True)
     df.insert(2, 'Mężczyźni', characterictics(M), True)
     return df
