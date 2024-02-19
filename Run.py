@@ -1,6 +1,7 @@
 import os
 import matplotlib.pyplot as plt
 from B import podpunktB
+from A_all_points import podpunktA
 
 # Inputting path to folder with data
 datapath = input("Prosze podać ścieżke z katalogiem healthy_decades: ")
@@ -11,12 +12,17 @@ path = os.getcwd()
 dir_list = os.listdir(path)
 dekadaM, dekadaF = [], []
 for i in range(0, len(dir_list)):
-    if 'm70' in dir_list[i]:
+    if '.txt' not in dir_list[i]:
+        continue
+    elif 'm70' in dir_list[i]:
         dekadaM.append(dir_list[i])
     elif 'f70' in dir_list[i]:
         dekadaF.append(dir_list[i])
 
-# Initializing point B and
+# Initializing point A
+podpunktA(dekadaF + dekadaM)
+
+# Initializing point B
 df = podpunktB(dekadaF, dekadaM)
 
 # Creating folder to save results
